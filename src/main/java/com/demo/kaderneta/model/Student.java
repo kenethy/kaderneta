@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -28,13 +29,18 @@ public class Student {
 	private String genre;
 	private String pendencies;
 
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "")
-	private ArrayList<Discipline> disciplines;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tb_registration")
+	private ArrayList<Registration> registrations;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Class classes;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tb_discipline")
+	private ArrayList<Discipline> discipline;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Frequency frequency;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	private Address address;
 }

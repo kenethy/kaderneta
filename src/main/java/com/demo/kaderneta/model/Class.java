@@ -8,11 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "tb_class")
 public class Class {
 
 	@Id
@@ -20,9 +22,9 @@ public class Class {
 	private Long id;
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tb_student")
 	private ArrayList<Student> students;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tb_classregister")
 	private ArrayList<ClassRegister> classregister;
 }
