@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -24,6 +26,7 @@ public class Registration {
 	private String serie;
 	private String info;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Student student;
 

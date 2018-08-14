@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -23,8 +25,8 @@ public class Frequency {
 	private Date date;
 	private boolean fault;
 	private boolean justification;
-	
+
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Discipline discipline;
-
 }

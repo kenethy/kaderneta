@@ -1,7 +1,7 @@
 package com.demo.kaderneta.model;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,18 +27,18 @@ public class User {
 	private String password;
 	private String name;
 	private Date date;
-	private String genre;
+	private String gender;
+	private String office;
 	private String obs;
 	private boolean active;
 	private boolean teacher;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	private Address address;
 
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "tb_class")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	private Class classes;
 
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "tb_discipline")
-	private ArrayList<Discipline> discipline;
-
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Discipline> discipline;
 }

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -25,6 +27,11 @@ public class ClassRegister {
 	private String info;
 	private String topic;
 
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Class classes;
+
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Discipline discipline;
 

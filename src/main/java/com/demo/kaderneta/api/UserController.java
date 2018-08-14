@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +26,13 @@ public class UserController {
 
 	@GetMapping
 	public List<User> listAll(User user) {
-		Example<User> example = Example.of(user);
-		return userRepository.findAll(example);
+		// Example<User> example = Example.of(user);
+		return userRepository.findAll();
 	}
 
 	@GetMapping(path = "/filter")
 	public List<User> filterBy(@RequestParam String name) {
-		return userRepository.findByNameLike(name);
+		return userRepository.findByName(name);
 	}
 
 	@GetMapping(path = "/{id}")

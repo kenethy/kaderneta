@@ -1,13 +1,16 @@
 package com.demo.kaderneta.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -21,10 +24,14 @@ public class Class {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tb_student")
-	private ArrayList<Student> students;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tb_classregister")
-	private ArrayList<ClassRegister> classregister;
+
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "classes")
+	private List<Student> students;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "classes")
+	private List<ClassRegister> classregister;
 }

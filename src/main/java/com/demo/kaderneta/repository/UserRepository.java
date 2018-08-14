@@ -8,5 +8,5 @@ import com.demo.kaderneta.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	List<User> findByNameLike(String name);
+	List<User> findByName(String name);
 }
