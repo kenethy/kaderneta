@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.demo.kaderneta.repository.UserRepository;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
 
 	@Autowired
@@ -42,6 +44,9 @@ public class UserController {
 
 	@PostMapping(path = "/add-users")
 	public User save(@RequestBody User user) {
+
+		if (userRepository.existsByLogin(user.getLogin()))
+			throw new RuntimeException("Login " + user.getLogin() + "já existe");
 		return userRepository.save(user);
 	}
 
@@ -52,17 +57,28 @@ public class UserController {
 	}
 
 	@PutMapping(path = "/{id}")
-	public User update(@PathVariable("id") Long id, @RequestParam UserController user) {
-		User userNew = userRepository.getOne(id);
+	public User update(@PathVariable("id") Long id, @RequestBody User user) {
+		User userUpdate = userRepository.getOne(id);
 
-		if (userNew == null) {
+		if (userUpdate == null) {
 			throw new RuntimeException("Usuário inválido: " + id);
 		}
 
-		/**
-		 * Inserir edição apenas dos dados modificados.
-		 */
+		userUpdate.setActive(user.isActive());
 
-		return userRepository.save(userNew);
+		return userRepository.save(userUpdate);
+	}
+
+	@PutMapping(path = "/{id}/add-disciplines")
+	public User updateDiscipline(@PathVariable("id") Long id, @RequestParam UserController user) {
+		User userEdit = userRepository.getOne(id);
+
+		if (userEdit == null) {
+			throw new RuntimeException("Usuário inválido: " + id);
+		}
+
+		userEdit.setDiscipline(user.get(id).get().getDiscipline());
+
+		return userRepository.save(userEdit);
 	}
 }

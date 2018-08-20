@@ -5,12 +5,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -32,12 +30,10 @@ public class User {
 	private String obs;
 	private boolean active;
 	private boolean teacher;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
-	private Address address;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
-	private Class classes;
+	private String street;
+	private String city;
+	private String state;
+	private String cep;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Discipline> discipline;

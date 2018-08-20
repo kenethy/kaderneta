@@ -9,4 +9,5 @@ import com.demo.kaderneta.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	List<User> findByName(String name);
+	boolean existsByLogin(String login);
 }

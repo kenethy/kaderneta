@@ -25,8 +25,13 @@ public class Frequency {
 	private Date date;
 	private boolean fault;
 	private boolean justification;
+	private boolean done;
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Discipline discipline;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Student student;
 }

@@ -35,9 +35,6 @@ public class Discipline {
 	private List<Frequency> frequency;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "discipline")
-	private List<Question> questions;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "discipline")
 	private List<Notes> notes;
 
 	@JsonIgnore

@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.kaderneta.model.Discipline;
-import com.demo.kaderneta.repository.DisciplineRepository;
+import com.demo.kaderneta.model.StudentDTO;
+import com.demo.kaderneta.repository.StudentDTORepository;
 
 @RestController
-@RequestMapping("/disciplines")
+@RequestMapping("/students-dto")
 @CrossOrigin
-public class DisciplineController {
+public class StudentDTOController {
 
 	@Autowired
-	private DisciplineRepository disciplineRepository;
+	private StudentDTORepository studentDTORepository;
 
 	@GetMapping
-	public List<Discipline> listAll(Discipline discipline) {
-		return disciplineRepository.findAll();
+	public List<StudentDTO> listAll(StudentDTO student) {
+		return studentDTORepository.findAll();
 	}
 }
